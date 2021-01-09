@@ -1,4 +1,6 @@
 # gradle-localstack-sns-example
+![Build](https://github.com/gregwhitaker/gradle-localstack-sns-example/workflows/Build/badge.svg)
+
 An example of working with mock AWS SNS endpoints using [LocalStack](https://github.com/localstack/localstack) and the [Gradle LocalStack Plugin](https://github.com/Nike-Inc/gradle-localstack).
 
 In this example you will see how to configure a local SNS topic with an attached SQS queue using LocalStack and the Gradle LocalStack Plugin.
