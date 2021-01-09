@@ -1,0 +1,35 @@
+import com.nike.pdm.localstack.aws.sns.CreateSnsTopicWithSqsEndpointTask
+
+plugins {
+    id "java"
+    id "application"
+    id "com.avast.gradle.docker-compose"    version "0.14.0"
+    id "com.nike.pdm.localstack"            version "0.1.0"
+}
+
+// Project Configuration
+group = "com.github.gregwhitaker"
+version = "0.1.0"
+mainClassName = "example.SnsExampleApplication"
+
+// Dependency Management
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "com.amazonaws:aws-java-sdk-sns:1.11.447"
+    implementation "com.amazonaws:aws-java-sdk-sqs:1.11.447"
+    implementation "org.slf4j:slf4j-simple:1.7.30"
+}
+
+// Docker Compose
+dockerCompose {
+    useComposeFiles = [ 'localstack/localstack-docker-compose.yml' ]
+}
+
+// LocalStack
+task setupSnsTopicWithSqsListener(type: CreateSnsTopicWithSqsEndpointTask) {
+    topicName = 'example-topic'         // Name of the SNS topic
+    queueName = 'example-topic-queue'   // Name of the SQS queue attached as a listener to the topic
+}
